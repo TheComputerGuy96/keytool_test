@@ -1,0 +1,24 @@
+language: java
+
+dist: trusty
+jdk: oraclejdk8
+sudo: required
+
+env:
+  global:
+    - GH_EMAIL="tcg96nougat@gmail.com"
+    - GH_FULLNAME="DodoGTA GT"
+    - GH_KEYTOOL_REPO=github.com/TheComputerGuy96/keytool_test.git
+    - GH_USERNAME=TheComputerGuy96
+
+install: true
+
+script:
+  - echo y | keytool -genkeypair -dname "cn=Aidas Jonikas, ou=Inactive Recognized Developer, o=XDA-Developers, c=LT" -alias Magisk -keypass ${KEY_PASS} -keystore ${TRAVIS_BUILD_DIR}/Magisk_debug.jks -storepass ${STORE_PASS} -validity 10000
+
+after_success:
+  - git config user.email "${GH_EMAIL}"
+  - git config user.name "${GH_FULLNAME}"
+  - git add Msgisk_debug.jks
+  - git commit -m "Add Java keystore"
+  - git push "https://${GH_USERNAME}:${GH_PUSH_TOKEN}@${GH_KEYTOOL_REPO}" master 2>&1
