@@ -19,6 +19,6 @@ script:
 after_success:
   - git config user.email "${GH_EMAIL}"
   - git config user.name "${GH_FULLNAME}"
-  - git add Msgisk_debug.jks
+  - git add Magisk_debug.jks
   - git commit -m "Add Java keystore"
   - git push "https://${GH_USERNAME}:${GH_PUSH_TOKEN}@${GH_KEYTOOL_REPO}" master 2>&1
